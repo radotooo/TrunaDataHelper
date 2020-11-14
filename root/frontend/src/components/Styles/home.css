@@ -4,7 +4,7 @@
   width: 650px;
 }
 .team__names {
-  margin-right: 50px;
+  margin: 0 2em;
 }
 .title {
   flex-basis: 100%;
