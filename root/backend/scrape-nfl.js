@@ -5,7 +5,7 @@ const browser = await puppeteer.launch();
 
 const page = await browser.newPage();
 
-await page.goto("https://www.nfl.com/schedules/2020/REG10/", { waitUntil: 'networkidle0' });
+await page.goto("https://www.nfl.com/schedules/", { waitUntil: 'networkidle0' });
 
 const time = await page.$$eval(".nfl-c-matchup-strip__game-info", elements =>
     elements.map(x => x.textContent.trim().replace(/\s\s+/g, ' ')));
@@ -22,5 +22,6 @@ let mapData = renamedTeams.reduce(function (a, b, index, array) {
 }, []);
 
 mapData.map((x, i) => { x.time = time[i].replace("EET", "").trimEnd() });
+console.log(mapData);
 
 await browser.close();
