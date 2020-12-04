@@ -27,7 +27,11 @@ export const renameTeams = {
     Ravens: "Baltimore Ravens",
     Patriots: "New England Patriots",
     Vikings: "Minnesota Vikings",
-    Bears: "Chicago Bears"
+    Bears: "Chicago Bears",
+    Cowboys: "Dallas Cowboys",
+    Chiefs: "Kansas city chiefs",
+    Falcons: "Atlanta Flacons",
+    Jets: "New Your Jets",
 }
 
 let a = "Colts"

@@ -37,7 +37,8 @@ export default function Home() {
                     {events.map(x => <p>{x.name.replace(" at ", " vs ")}</p>)}
                 </div>
                 <div className="team__time">
-                    {events.map(x => <p>{new Date(x.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>)}
+                    {events.sort((a, b) => { return new Date(a.date) - new Date(b.date) })
+                        .map(x => <p> {new Date(x.date).toLocaleTimeString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>)}
                 </div>
             </div>
         </div>
