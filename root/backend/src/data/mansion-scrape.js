@@ -7,13 +7,15 @@ const getData = async () => {
 
   page.on('response', async (response) => {
     if (response.request().method() === 'POST') {
+      // console.log(response.request().postData());
       if (
         response.request().url() ===
-        'https://sbapi.sbtech.com/mansioncom/sportscontent/sportsbook/v1/Events/GetByLeagueId'
+          'https://sbapi.sbtech.com/mansioncom/sportscontent/sportsbook/v1/Events/GetByLeagueId' &&
+        response.request().postData().includes('Fixture')
       ) {
-        try {
-          const data = await response.json();
+        const data = await response.json();
 
+        try {
           fs.writeFileSync(
             './src/data/scraped-data/mansion.json',
             JSON.stringify(data.events),
@@ -31,11 +33,11 @@ const getData = async () => {
     waitUntil: 'load',
   });
   await page.waitForSelector(
-    '#html-container-Center_LeagueViewResponsiveBlock_15984',
+    '#eventsWrapper-Center_LeagueViewResponsiveBlock_15984 > sb-comp > div:nth-child(1) > div > sb-lazy-render > div:nth-child(1) > div > div.rj-ev-list__inner-holder > a',
     { visible: true }
   );
-  console.log('data scraped');
+  console.log('mansion scraped');
   await browser.close();
 };
-
+// await getData();
 export default getData;

@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    let formatedData = await parseData();
-    res.json(formatedData);
+    let parsedData = await parseData();
+    res.json(parsedData);
   } catch (error) {
     res.json(error.message);
   }

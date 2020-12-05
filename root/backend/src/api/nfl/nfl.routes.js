@@ -1,13 +1,12 @@
 import express from 'express';
-import getData from './nfl.service.js';
+import { parseData } from './nfl.service.js';
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    let data = await getData();
-    console.log(data);
-    res.json(data);
+    let parsedData = await parseData();
+    res.json(parsedData);
   } catch (error) {}
 });
 

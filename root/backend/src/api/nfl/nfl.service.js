@@ -1,30 +1,22 @@
-import puppeteer from 'puppeteer';
+import fs from 'fs';
 
-const getData = async () => {
-  let result;
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  page.on('response', async (response) => {
-    if (response.request().method() === 'GET') {
-      if (
-        response.request().url() ===
-        'https://api.nfl.com/football/v1/games?season=2020&seasonType=REG&week=13&withExternalIds=true'
-      ) {
-        try {
-          const data = await response.json();
-          // console.log(data);
-          result = data;
-        } catch (error) {
-          return error;
-        }
-      }
-    }
-  });
-  await page.goto('https://www.nfl.com/schedules/', {
-    waitUntil: 'load',
-  });
-  await browser.close();
-  return result;
+const parseData = () => {
+  let rawdata = fs.readFileSync('./src/data/scraped-data/nfl.json');
+  let data = JSON.parse(rawdata);
+  return data.data.viewer.league.gamesByWeek.reduce((a, b) => {
+    let match = {
+      time: b.gameTime
+        ? new Date(b.gameTime).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })
+        : 'none',
+      date: b.gameTime ? new Date(b.gameTime) : 'none',
+      home: b.homeTeam.fullName,
+      away: b.awayTeam.fullName,
+    };
+    a.push(match);
+    return a;
+  }, []);
 };
-
-export default getData;
+export { parseData };
