@@ -8,12 +8,10 @@ const getData = async () => {
   page.on('response', async (response) => {
     if (response.request().method() === 'GET') {
       if (
-        response
-          .request()
-          .url()
-          .includes(
-            'https://api.nfl.com/v3/shield/?query=query%7Bviewer%7Bleague%7BgamesByWeek'
-          )
+        response.request().url().includes(
+          'https://api.nfl.com/football/v1/games?season=2020&seasonType'
+          // 'https://api.nfl.com/v3/shield/?query=query%7Bviewer%7Bleague%7BgamesByWeek'
+        )
       ) {
         try {
           const data = await response.json();
