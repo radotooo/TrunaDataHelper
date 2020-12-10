@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 
+//scrape with puppeteer
 const getData = async () => {
   let result;
   const browser = await puppeteer.launch();
@@ -8,16 +9,15 @@ const getData = async () => {
   page.on('response', async (response) => {
     if (response.request().method() === 'GET') {
       if (
-        response
-          .request()
-          .url()
-          .includes(
-            'https://api.nfl.com/v3/shield/?query=query%7Bviewer%7Bleague%7BgamesByWeek'
-          )
+        response.request().url().includes(
+          //alternative route
+          // 'https://api.nfl.com/football/v1/games?season=2020&seasonType'
+          'https://api.nfl.com/v3/shield/?query=query%7Bviewer%7Bleague%7BgamesByWeek'
+        )
       ) {
         try {
           const data = await response.json();
-          // console.log(JSON.stringify(data));
+
           result = data;
         } catch (error) {
           return error;
