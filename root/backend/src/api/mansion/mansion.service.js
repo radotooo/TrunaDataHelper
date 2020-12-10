@@ -19,6 +19,4 @@ const parseData = () => {
   }, []);
 };
 
-// console.log(parseData());
-
 export { parseData };

@@ -1,6 +1,7 @@
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 
+//scrape with puppeteer
 const getData = async () => {
   let result;
   const browser = await puppeteer.launch();

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getDataForCurrentAndNextWeek } from './nfl.service.js';
+import { getDataForCurrentAndNextWeek } from './espn.service.js';
 
 const router = express.Router();
 

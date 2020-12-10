@@ -1,6 +1,4 @@
 import axios from 'axios';
-import fs from 'fs';
-//site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=15
 
 const formatData = (data) => {
   return data.reduce((a, b) => {
@@ -24,15 +22,23 @@ const formatData = (data) => {
 };
 
 const getData = async (week) => {
-  console.log('inside before try catch');
   try {
     const currenntWeekData = await axios.get(
       `http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?week=${week}`
     );
+    const { data } = currenntWeekData;
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
 
-    let { events } = currenntWeekData.data;
+const getAndParseData = async (week) => {
+  console.log('inside before try catch');
+  try {
+    const data = await getData(week);
+    let { events } = data;
     let parsedData = formatData(events);
-
     return parsedData;
   } catch (error) {
     return error;
@@ -42,15 +48,12 @@ const getData = async (week) => {
 //get data from api for both weeks and save it to file
 const getDataForCurrentAndNextWeek = async (week) => {
   try {
-    let currentWeek = await getData(week);
-    let nextWeek = await getData(week + 1);
-    fs.writeFileSync(
-      './scraped-data/espn.json',
-      JSON.stringify([currentWeek, nextWeek].flat()) //flat into 1 big object with both weeks games
-    );
+    let currentWeek = await getAndParseData(week);
+    let nextWeek = await getAndParseData(week + 1);
+    return [currentWeek, nextWeek].flat();
   } catch (error) {
     return error;
   }
 };
 
-export default getData;
+export { getDataForCurrentAndNextWeek };
