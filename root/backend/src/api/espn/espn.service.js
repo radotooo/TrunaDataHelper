@@ -49,7 +49,7 @@ const getAndParseData = async (week) => {
 const getDataForCurrentAndNextWeek = async (week) => {
   try {
     let currentWeek = await getAndParseData(week);
-    let nextWeek = await getAndParseData(week + 1);
+    let nextWeek = await getAndParseData(Number(week) + 1);
     return [currentWeek, nextWeek].flat();
   } catch (error) {
     return error;

@@ -42,11 +42,11 @@ const parseDataFromApi = async (week) => {
 const getDataForCurrentAndNextWeek = async (week) => {
   try {
     let currentWeek = await parseDataFromApi(week);
-    let nextWeek = await parseDataFromApi(week + 1);
+    let nextWeek = await parseDataFromApi(Number(week) + 1);
     return [currentWeek, nextWeek].flat();
   } catch (error) {
     return error;
   }
 };
 
-export { getDataForCurrentAndNextWeek };
+export { getDataForCurrentAndNextWeek, getDataForCurrentAndNextWeek2 };
