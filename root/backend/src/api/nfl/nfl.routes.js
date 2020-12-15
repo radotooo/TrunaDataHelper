@@ -3,8 +3,8 @@ import { getDataForCurrentAndNextWeek } from './nfl.service.js';
 
 const router = express.Router();
 
-router.post('/', async (req, res, next) => {
-  const { week } = req.body;
+router.get('/:week', async (req, res, next) => {
+  const { week } = req.params;
   try {
     let parsedData = await getDataForCurrentAndNextWeek(week);
     res.json(parsedData);
