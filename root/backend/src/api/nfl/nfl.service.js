@@ -49,4 +49,4 @@ const getDataForCurrentAndNextWeek = async (week) => {
   }
 };
 
-export { getDataForCurrentAndNextWeek, getDataForCurrentAndNextWeek2 };
+export { getDataForCurrentAndNextWeek};

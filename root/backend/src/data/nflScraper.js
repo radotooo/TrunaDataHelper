@@ -11,13 +11,13 @@ const getData = async () => {
       if (
         response.request().url().includes(
           //alternative route
-          // 'https://api.nfl.com/football/v1/games?season=2020&seasonType'
-          'https://api.nfl.com/v3/shield/?query=query%7Bviewer%7Bleague%7BgamesByWeek'
+          'https://api.nfl.com/football/v1/games?season=2020&seasonType'
+          // 'https://api.nfl.com/v3/shield/?query=query%7Bviewer%7Bleague%7BgamesByWeek'
         )
       ) {
         try {
           const data = await response.json();
-
+       console.log(data);
           result = data;
         } catch (error) {
           return error;

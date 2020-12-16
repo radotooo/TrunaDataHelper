@@ -34,7 +34,6 @@ const getData = async (week) => {
 };
 
 const getAndParseData = async (week) => {
-  console.log('inside before try catch');
   try {
     const data = await getData(week);
     let { events } = data;
@@ -55,5 +54,7 @@ const getDataForCurrentAndNextWeek = async (week) => {
     return error;
   }
 };
+
+getDataForCurrentAndNextWeek(14)
 
 export { getDataForCurrentAndNextWeek };
