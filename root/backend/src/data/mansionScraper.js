@@ -7,7 +7,6 @@ const getData = async () => {
 
   page.on('response', async (response) => {
     if (response.request().method() === 'POST') {
-      // console.log(response.request().postData());
       if (
         response.request().url() ===
           'https://sbapi.sbtech.com/mansioncom/sportscontent/sportsbook/v1/Events/GetByLeagueId' &&
@@ -39,5 +38,4 @@ const getData = async () => {
   console.log('mansion scraped');
   await browser.close();
 };
-// await getData();
 export default getData;
